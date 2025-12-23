@@ -1,0 +1,30 @@
+# ===================================================================
+# Requirements para Download Nuvem CAED
+# ===================================================================
+# 
+# Instalação:
+#   pip install -r requirements.txt
+#
+# Atualização:
+#   pip install --upgrade -r requirements.txt
+# ===================================================================
+
+# Core - Análise de Dados
+pandas>=2.0.0,<3.0.0
+numpy>=1.24.0,<2.0.0
+
+# Requisições HTTP
+requests>=2.31.0,<3.0.0
+
+# Banco de Dados
+sqlalchemy>=2.0.0,<3.0.0
+pyodbc>=5.0.0,<6.0.0
+
+# Excel (para leitura/escrita de arquivos .xlsx)
+openpyxl>=3.1.0,<4.0.0
+
+# Jupyter Notebook (se necessário)
+jupyter>=1.0.0,<2.0.0
+notebook>=7.0.0,<8.0.0
+ipykernel>=6.25.0,<7.0.0
+# ===================================================================
