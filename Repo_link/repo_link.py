@@ -2,8 +2,9 @@
 Sistema unificado de integração com o Repositório CAED
 Suporta ambientes: Central e CPD
 
-Autor: Refatoração do sistema original
-Data: 2024
+Assunto: Refatoração do sistema original
+Autor: Jhonatan Oliveira
+Data: 2025
 """
 
 import os
@@ -19,8 +20,10 @@ import requests
 import pandas as pd
 from dotenv import load_dotenv
 
-# Carrega variáveis de ambiente
-load_dotenv()
+# Carrega variáveis de ambiente do .env no diretório do script
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+_env_path = os.path.join(_script_dir, '.env')
+load_dotenv(_env_path)
 
 
 # ==================== CONSTANTES ====================
@@ -118,8 +121,19 @@ class FormularioConfig:
 class Config:
     """Gerencia as configurações do ambiente"""
     
-    def __init__(self):
-        self.ambiente = os.getenv('AMBIENTE', 'central').lower()
+    def __init__(self, ambiente: Optional[str] = None):
+        """
+        Inicializa as configurações
+        
+        Args:
+            ambiente: 'central' ou 'cpd'. Se None, usa variável AMBIENTE do .env
+        """
+        # Prioridade: 1) parâmetro, 2) variável ambiente OS, 3) .env, 4) padrão 'central'
+        self.ambiente = (
+            ambiente or 
+            os.environ.get('REPO_AMBIENTE') or 
+            os.getenv('AMBIENTE', 'central')
+        ).lower()
         self._carregar_config()
     
     def _carregar_config(self):
@@ -151,8 +165,24 @@ class Config:
 class RepositorioCAED:
     """Classe principal para interação com o Repositório CAED"""
     
-    def __init__(self):
-        self.config = Config()
+    def __init__(self, ambiente: Optional[str] = None):
+        """
+        Inicializa o cliente do repositório
+        
+        Args:
+            ambiente: 'central' ou 'cpd'. Se None, usa configuração do .env
+            
+        Examples:
+            >>> # Usa ambiente do .env
+            >>> repo = RepositorioCAED()
+            
+            >>> # Força ambiente central
+            >>> repo = RepositorioCAED(ambiente='central')
+            
+            >>> # Força ambiente cpd
+            >>> repo = RepositorioCAED(ambiente='cpd')
+        """
+        self.config = Config(ambiente=ambiente)
         self.bearer_token = None
     
     def autenticar(self) -> str:
@@ -772,18 +802,18 @@ def get_bearer_token(password: str, username: str, url: str) -> str:
 
 # ==================== EXEMPLO DE USO ====================
 
-# if __name__ == "__main__":
-#     # Exemplo de uso
-#     print("Inicializando sistema...")
+if __name__ == "__main__":
+    # Exemplo de uso
+    print("Inicializando sistema...")
     
-#     # Cria instância
-#     repo = RepositorioCAED()
+    # Cria instância
+    repo = RepositorioCAED()
     
-#     # Autentica
-#     print(f"Ambiente: {repo.config.ambiente}")
-#     print("Autenticando...")
-#     token = repo.autenticar()
-#     print(f"Token obtido: {token[:20]}...")
+    # Autentica
+    print(f"Ambiente: {repo.config.ambiente}")
+    print("Autenticando...")
+    token = repo.autenticar()
+    print(f"Token obtido: {token[:20]}...")
     
     # Exemplo de download (comentado para não executar automaticamente)
     # caminho = repo.baixar_dado_adm(
