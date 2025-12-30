@@ -48,6 +48,9 @@ BANCO_DE_DADOS = 'seu_banco'
 
 # Processamento
 COLLECTIONS = ['E_1308_ENTURMACAO']  # Collections desejadas
+
+# Configuração do Where
+WHERE_CLAUSE = {"excluido": False} # Filtro para consulta das collections
 ```
 
 ### Execução
