@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">BULK INSERT</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Jhonatan Oliveira</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>BULK INSERT</Title>
+			<Description>Code Snippet BULK INSERT</Description>
+			<Author>Jhonatan Oliveira</Author>
+			<SnippetTypes>
+                                <SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="SQL">
+
+/*IMPORTA CSV COM PIPELINE*/
+TRUNCATE TABLE ARQ_AD_055_D_1434_20221221095646_000048464_CENSO_ESCOLAR_PROD
+
+BULK INSERT ARQ_AD_055_D_1434_20221221095646_000048464_CENSO_ESCOLAR_PROD
+FROM 'E:\BULK\ARQ_AD_055_D_1434_20221221095646_000048464_CENSO_ESCOLAR_PROD.csv'
+WITH
+(
+    CODEPAGE = 'RAW',
+    FIELDTERMINATOR = '|',
+    FIRSTROW = 2,
+    ROWTERMINATOR = '\n'
+)
+
+SELECT COUNT (*) FROM ARQ_AD_055_D_1434_20221221095646_000048464_CENSO_ESCOLAR_PROD
+/*
+/*IMPORTA CSV COM PONTO E VIRGULA*/
+
+BULK INSERT microdados_ed_basica_2022
+FROM 'F:\BULK\microdados_ed_basica_2022.csv'
+WITH (FORMAT = 'CSV'
+      , FIRSTROW = 2
+--      , FIELDQUOTE = '\'
+      , FIELDTERMINATOR = ';'
+      , ROWTERMINATOR = '0x0a'
+      , CODEPAGE = 'ACP');
+*/
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

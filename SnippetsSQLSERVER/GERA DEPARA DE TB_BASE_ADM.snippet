@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">GERA DEPARA DE TB_BASE_ADM</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Jhonatan Oliveira</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>GERA DEPARA DE TB_BASE_ADM</Title>
+			<Description>Code Snippet GERA DEPARA DE TB_BASE_ADM</Description>
+			<Author>Jhonatan Oliveira</Author>
+			<SnippetTypes>
+                                <SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="SQL">
+EXEC [SDV_TESTE_IMPORTACAO].[DBO].[SP_GERA_DEPARA_ADM]
+	 @NM_BANCO /*BANCO DE DADOS DE ORIGEM E DESTINO DOS DADOS*/
+   , @BASE_INSTITUCIONAL /*BASE INSTITUCIONAL CONTENDO OS REGISTROS*/
+   , @NM_TABELA_ADM /*TABELA DE DESTINO DOS DADOS (TB_BASE_ADM)*/
+GO
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">AJUSTA DT_NASCIMENTO</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Jhonatan Oliveira</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>AJUSTA DT_NASCIMENTO</Title>
+			<Description>Code Snippet AJUSTA DT_NASCIMENTO</Description>
+			<Author>Jhonatan Oliveira</Author>
+			<SnippetTypes>
+                                <SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="SQL">
+
+UPDATE SUA_BASE SET DT_NASCIMENTO = CONVERT(VARCHAR(10), CAST(DT_NASCIMENTO AS DATETIME), 103)
+
+UPDATE RESULTADO_SERE_NOMINAL_9_3_12_02_2025_atualizada
+SET DT_NASCIMENTO = FORMAT(TRY_CAST(DT_NASCIMENTO AS DATETIME), 'dd/MM/yyyy', 'pt-BR')
+WHERE TRY_CAST(DT_NASCIMENTO AS DATETIME) IS NOT NULL;
+
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

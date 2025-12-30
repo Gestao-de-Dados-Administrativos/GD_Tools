@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">GERA CODIGO DE ENTIDADE</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Jhonatan Oliveira</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>GERA CODIGO DE ENTIDADE</Title>
+			<Description>Code Snippet GERA CODIGO DE ENTIDADE</Description>
+			<Author>Jhonatan Oliveira</Author>
+			<SnippetTypes>
+                                <SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="SQL">
+EXEC [SDV_TESTE_IMPORTACAO].[DBO].[SP_GERA_ENTIDADE]
+	 @NM_BANCO /*BANCO DE DADOS DE ORIGEM E DESTINO DOS DADOS*/
+   , @NM_TABELA /*TABELA CONTENDO OS REGISTROS*/
+   , @TP_ENTIDADE /*TIPO DA ENTIDADE A SER ATUALIZADA (TURMA OU ALUNO)*/
+GO
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

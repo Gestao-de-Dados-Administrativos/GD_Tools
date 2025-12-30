@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Limpa campos NULL</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Jhonatan Oliveira</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>LIMPA CAMPOS NULL</Title>
+			<Description>Code Snippet LIMPA CAMPOS NULL</Description>
+			<Author>Jhonatan Oliveira</Author>
+			<SnippetTypes>
+                                <SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="SQL">
+DECLARE @tabela NVARCHAR(255) = '';
+DECLARE @script NVARCHAR(MAX) = '';
+
+SELECT @script = @script + 
+                'UPDATE ' + @tabela + 
+                ' SET ' + QUOTENAME(name) + ' = ISNULL(' + QUOTENAME(name) + ', '''');' + CHAR(13)
+FROM sys.columns
+WHERE object_id = OBJECT_ID(@tabela);
+
+-- Exibir o script gerado
+--PRINT @script;
+
+-- Executar o script gerado
+EXEC sp_executesql @script;
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

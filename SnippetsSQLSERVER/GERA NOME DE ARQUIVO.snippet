@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">GERA NOME DE ARQUIVO</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Jhonatan Oliveira</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>GERA NOME DE ARQUIVO</Title>
+			<Description>Code Snippet GERA NOME DE ARQUIVO</Description>
+			<Author>Jhonatan Oliveira</Author>
+			<SnippetTypes>
+                                <SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="SQL">
+DECLARE @DC_LAYOUT VARCHAR(50) = ''
+DECLARE @CD_LAYOUT VARCHAR(50) = ''
+DECLARE @ACTION CHAR = ''
+
+SELECT CONCAT('ARQ_'+@DC_LAYOUT+'_'+@CD_LAYOUT+'_'+@ACTION+'_',CD_PROGRAMA_REGISTRO,'_',
+SUBSTRING(REPLACE(REPLACE(REPLACE(CONVERT(VARCHAR,GETDATE(),121),'-',''),':',''),' ',''),1,LEN(REPLACE(REPLACE(REPLACE(CONVERT(VARCHAR,GETDATE(),121),'-',''),':',''),' ',''))-4),
+SUBSTRING('_000000000',CONVERT(NUMERIC,1),(CONVERT(NUMERIC,10)-CONVERT(NUMERIC,LEN(COUNT(*))))),COUNT(*),'.csv')
+FROM ARQ_US_185_D_1375_20231004171116_000000400
+GROUP BY CD_PROGRAMA_REGISTRO
+
+            </Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

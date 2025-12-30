@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">ABRIR AGRUPADOR</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Jhonatan Oliveira</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>ABRIR AGRUPADOR</Title>
+			<Description>Code Snippet ABRIR AGRUPADOR</Description>
+			<Author>Jhonatan Oliveira</Author>
+			<SnippetTypes>
+                                <SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="SQL">
+/*Primeira forma*/
+SELECT DISTINCT DC_LOGIN, NM_USUARIO, ED_EMAIL, NU_CPF, CD_PERFIL, CD_AGREGADO 
+  FROM BC.dbo.TB_USUARIO U
+  CROSS APPLY OPENJSON(AR_PERFIL)
+  with (
+        CD_PERFIL NVARCHAR(MAX) '.CD_PERFIL', --Acrescentar o Dólar
+        CD_AGREGADOS NVARCHAR(MAX) '.CD_AGREGADOS' AS JSON --Acrescentar o Dólar
+  )
+  OUTER APPLY OPENJSON(CD_AGREGADOS)
+    WITH (CD_AGREGADO NVARCHAR(8) '')  --Acrescentar o Dólar
+  WHERE   ISJSON(AR_PERFIL) > 0
+
+/*Outra forma*/
+SELECT NM_ESTADO, CD_MUNICIPIO, NM_MUNICIPIO, CD_ESCOLA, NM_ESCOLA, CD_REDE,DC_REDE,
+ NU_CPF,NM_USUARIO, value AS AGRUPADOR,json_value(value,'$.CD_TURMA') AS CD_TURMA,json_value(value,'$.CD_DISCIPLINA') AS CD_DISCIPLINA, NM_PERIODO_LETIVO --Acrescentar o Dólar
+FROM #TB_TURMA_PROFESSOR P
+CROSS APPLY OPENJSON(CD_AGRUPADOR_TURMA_DISCIPLINA)
+WHERE ISJSON(CD_AGRUPADOR_TURMA_DISCIPLINA) >  0
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

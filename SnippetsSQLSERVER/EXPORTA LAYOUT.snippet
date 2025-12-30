@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Exporta Layout</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Jhonatan Oliveira</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>EXPORTA LAYOUT</Title>
+			<Description>Code Snippet EXPORTA LAYOUT</Description>
+			<Author>Jhonatan Oliveira</Author>
+			<SnippetTypes>
+                                <SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="SQL">
+DECLARE @TB VARCHAR(500) = '' -- Nome da tabela
+DECLARE @SQL_ESPECIAIS NVARCHAR(MAX) = 'SELECT DISTINCT' + CHAR(10)
+--DECLARE @FILTRO VARCHAR(MAX) = '' --Filtro 
+
+SELECT @SQL_ESPECIAIS = COALESCE(@SQL_ESPECIAIS, '') + 
+    CASE WHEN ROW_NUMBER() OVER(ORDER BY c.column_id) = 1 
+         THEN 'ISNULL(CAST([' + C.NAME + '] AS VARCHAR(500)),'''')' 
+         ELSE IIF(C.NAME LIKE '%AGRUPADOR%' OR C.NAME LIKE '%AR_PERFIL%',
+                ' + ''|'' + ISNULL(CAST([' + C.NAME + '] AS VARCHAR(MAX)),'''')',
+                ' + ''|'' + ISNULL(CAST([' + C.NAME + '] AS VARCHAR(500)),'''')') 
+    END + CHAR(10)
+FROM SYS.TABLES T
+INNER JOIN SYS.COLUMNS C ON C.OBJECT_ID = T.OBJECT_ID
+WHERE T.NAME = @TB
+ORDER BY c.column_id  -- Isso garante que as colunas serão processadas na ordem correta
+
+SET @SQL_ESPECIAIS = @SQL_ESPECIAIS + 'FROM ' + @TB --+' WHERE '+ @FILTRO
+
+-- Visualizar a string completa
+SELECT @SQL_ESPECIAIS;
+
+
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

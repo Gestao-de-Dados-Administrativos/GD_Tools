@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">VERIFICAR HIERARQUIA</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Jhonatan Oliveira</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+   <_locTag _loc="locData">Default</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>VERIFICAR HIERARQUIA</Title>
+			<Description>Code Snippet VERIFICAR HIERARQUIA</Description>
+			<Author>Jhonatan Oliveira</Author>
+			<SnippetTypes>
+                                <SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="SQL">
+
+/*VERIFICAR HIERARQUIA*/
+
+EXEC SDV_TESTE_IMPORTACAO.DBO.SP_VERIFICA_DUPLICIDADE_HIERARQUIA 
+ '' /*FORM DE ESTADO*/
+,'' /*FORM DE REGIONAL*/
+,'' /*FORM DE MUNICIPIO*/
+,'' /*FORM DE ESCOLA*/
+
+            </Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
